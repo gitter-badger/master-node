@@ -9,16 +9,18 @@ http
     // 1. Get the url and parse it
     const parseUrl = url.parse(request.url, true)
 
-    // 2. Get the path
+    // 2. Get the trimmed path
     const path = parseUrl.pathname
-    // trim slashes at the end and the begining
-    const trimmedPath = path.replace(/^\/+|\/+$/g, '')
+      .replace(/^\/+|\/+$/g, '') // trim slashes at the end and the begining
 
-    // 3. Send the response
+    // 3. Get the HTTP method
+    const method = request.method.toLowerCase()
+
+    // 4. Send the response
     response.end('hello world!\n')
 
-    // 4. Log the url request
-    console.log(`Request received on: '${trimmedPath}'`)
+    // 5. Log the url request
+    console.log(`Request ${method.toUpperCase()}: '${path}'`)
   })
   .listen(3000, () => {
     console.log('The server is listening on port 3000 now')
